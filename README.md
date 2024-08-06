@@ -1,37 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 로그인 폼 및 폼 핸들링과 검증
 
-## Getting Started
+## 프로젝트 설명
 
-First, run the development server:
+이 프로젝트는 React 기반의 로그인 폼으로, 폼 핸들링, 검증 및 비동기 폼 제출을 시연합니다. `react-dom`의 커스텀 훅을 사용하여 폼 상태를 관리하고 서버 응답을 처리합니다.
+
+## 주요 기능
+
+- **폼 검증:** 이메일, 사용자 이름, 비밀번호 필드를 검증하며 사용자 친화적인 오류 메시지를 제공합니다.
+- **비동기 제출:** 네트워크 요청을 모방한 지연 시간으로 폼 제출을 처리합니다.
+- **성공 및 오류 메시지:** 폼 제출 결과에 따라 성공 또는 오류 메시지를 표시합니다.
+- **로딩 상태:** 폼이 제출되는 동안 로딩 표시기를 보여줍니다.
+
+## 사용 방법
+
+1. 브라우저에서 로그인 페이지를 엽니다.
+2. 이메일, 사용자 이름, 비밀번호 필드를 입력합니다.
+3. "로그인" 버튼을 클릭하여 폼을 제출합니다.
+4. 폼 제출 결과에 따라 성공 또는 오류 메시지를 확인합니다.
+
+## 시작하기
+
+프로젝트를 시작하려면 먼저 개발 서버를 실행합니다:
 
 ```bash
 npm run dev
-# or
+# 또는
 yarn dev
-# or
+# 또는
 pnpm dev
-# or
+# 또는
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저에서 http://localhost:3000으로 이동하여 결과를 확인합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+페이지를 수정하려면 app/page.tsx 파일을 편집하세요. 파일을 편집할 때 페이지가 자동으로 업데이트됩니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# login-form-nextjs
+이 프로젝트는 next/font를 사용하여 Inter라는 사용자 정의 Google Font를 자동으로 최적화하고 로드합니다.

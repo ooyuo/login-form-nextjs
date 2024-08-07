@@ -1,51 +1,49 @@
+import { toast } from "react-toastify";
+import { z } from "zod";
+
 interface IFormInput {
   email: string;
   username: string;
   password: string;
 }
 
+const formSchema = z.object({
+  email: z
+    .string()
+    .refine(
+      (name) => name.includes("@zod.com"),
+      "@zod.com 이메일만 가능합니다."
+    ),
+  username: z
+    .string()
+    .min(5, "최소 5글자 이상 입력해주세요.")
+    .regex(/^[a-zA-Z가-힣]*$/, "영어와 한글만 입력 가능합니다."),
+  password: z
+    .string()
+    .min(10)
+    .refine((password) => /\d/.test(password), {
+      message: "비밀번호는 최소한 1개의 숫자를 포함해야 합니다.",
+    }),
+});
+
 export async function handleForm(prevState: any, formData: FormData) {
   const email = formData.get("email") as string;
   const username = formData.get("username") as string;
   const password = formData.get("password") as string;
 
-  const errors: { [key: string]: string } = {};
-
-  if (!email) {
-    errors.email = "이메일을 입력해주세요.";
-  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-    errors.email = "이메일 형식으로 입력해주세요.";
-  }
-
-  if (!username) {
-    errors.username = "이름을 입력해주세요.";
-  }
-
-  if (!password) {
-    errors.password = "비밀번호를 입력해주세요.";
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return {
-      errors,
-      message: "Validation failed.",
-      isSuccess: false,
-    };
-  }
+  const data = {
+    email,
+    username,
+    password,
+  };
 
   await new Promise((resolve) => setTimeout(resolve, 200));
+  const result = formSchema.safeParse(data);
 
-  if (password === "12345") {
-    return {
-      errors: {},
-      message: "Success!",
-      isSuccess: true,
-    };
+  if (!result.success) {
+    toast.error("로그인에 실패했어요");
+    return result.error.flatten();
   } else {
-    return {
-      errors: { password: "비밀번호가 틀렸어요." },
-      message: "Failure",
-      isSuccess: false,
-    };
+    toast.success("로그인 성공 !");
   }
 }

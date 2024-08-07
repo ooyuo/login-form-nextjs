@@ -1,4 +1,4 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import { IconType } from "react-icons";
 
 interface InputFieldProps {
@@ -6,7 +6,7 @@ interface InputFieldProps {
   type: string;
   placeholder: string;
   name: string;
-  error?: string;
+  errors?: string[];
 }
 
 function InputField({
@@ -14,8 +14,9 @@ function InputField({
   type,
   placeholder,
   name,
-  error,
-}: InputFieldProps) {
+  errors = [],
+  ...rest
+}: InputFieldProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="flex flex-col">
       <div className="flex items-center border-b border-gray-300 py-2">
@@ -25,10 +26,11 @@ function InputField({
           name={name}
           placeholder={placeholder}
           className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+          {...rest}
         />
       </div>
 
-      {error && <span className="text-red-500 text-sm mt-1">{error}</span>}
+      {errors && <span className="text-red-500 text-sm mt-1">{errors}</span>}
     </div>
   );
 }

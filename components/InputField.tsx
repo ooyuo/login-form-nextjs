@@ -30,7 +30,13 @@ function InputField({
         />
       </div>
 
-      {errors && <span className="text-red-500 text-sm mt-1">{errors}</span>}
+      {errors && (
+        <div className="flex flex-col text-red-500 text-sm mt-1">
+          {errors.map((error, index) => (
+            <span key={`${error}-${index}`}>{error}</span>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

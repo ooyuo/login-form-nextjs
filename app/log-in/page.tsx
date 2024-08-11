@@ -5,18 +5,16 @@ import React from "react";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import FormButton from "@/components/FormButton";
 import { useFormState } from "react-dom";
-import { handleForm } from "@/actions/login";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { handleLogin } from "./actions";
 
 export interface IFormInput {
   email: string;
-  username: string;
   password: string;
 }
 
 function LoginPage() {
-  const [state, action] = useFormState(handleForm, null);
+  const [state, action] = useFormState(handleLogin, null);
 
   return (
     <>
@@ -33,24 +31,15 @@ function LoginPage() {
             errors={state?.fieldErrors.email}
           />
           <InputField
-            icon={FaUser}
-            type="text"
-            placeholder="Username"
-            name="username"
-            minLength={5}
-            errors={state?.fieldErrors.username}
-          />
-          <InputField
             icon={FaLock}
             type="password"
             placeholder="Password"
             name="password"
             errors={state?.fieldErrors.password}
           />
-          <FormButton />
+          <FormButton type="login" />
         </form>
       </div>
-      <ToastContainer />
     </>
   );
 }
